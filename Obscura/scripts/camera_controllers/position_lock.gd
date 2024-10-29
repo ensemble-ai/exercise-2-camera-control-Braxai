@@ -1,9 +1,11 @@
 class_name PositionLock
 extends CameraControllerBase
 
+
 func _ready() -> void:
 	super()
 	position = target.position
+
 
 func _process(delta: float) -> void:
 	if !current: 

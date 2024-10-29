@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bu80st6dhcnla" path="res://scenes/controlled_camera.tscn" id="3_ttnp6"]
 [ext_resource type="PackedScene" uid="uid://kafb18nsdh54" path="res://scenes/terrain_manager.tscn" id="4_josyl"]
 [ext_resource type="AudioStream" uid="uid://6tbtl0jk0dlo" path="res://assets/audio/VGMA Challenge - July 16th.wav" id="5_o8tm3"]
+[ext_resource type="Script" path="res://scripts/camera_controllers/auto_scroll.gd" id="6_04mqp"]
 [ext_resource type="Script" path="res://scripts/camera_controllers/position_lock.gd" id="7_8l3yc"]
-[ext_resource type="Script" path="res://scripts/camera_controllers/camera_controller_base.gd" id="8_wjhmo"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wseh8"]
 _surfaces = [{
@@ -43,7 +43,7 @@ terrain_manager = NodePath("../TerrainManager")
 
 [node name="CameraSelector" type="Node" parent="." node_paths=PackedStringArray("cameras")]
 script = ExtResource("2_qffo5")
-cameras = [NodePath("../PositionLock"), null]
+cameras = [NodePath("../AutoScroll"), NodePath("../PositionLock")]
 
 [node name="PushBoxCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_ttnp6")]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 30, 0)
@@ -53,7 +53,7 @@ target = NodePath("../Vessel")
 visible = false
 offset_right = 40.0
 offset_bottom = 23.0
-text = "push box
+text = "
 "
 script = ExtResource("3_4fllx")
 
@@ -62,8 +62,22 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 script = ExtResource("7_8l3yc")
 target = NodePath("../Vessel")
 
-[node name="PushBoxCamera2" parent="." instance=ExtResource("3_ttnp6")]
+[node name="AutoScroll" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("6_04mqp")
+top_left = null
+bottom_right = Vector2(20, 14)
+autoscroll_speed = null
+target = NodePath("../Vessel")
+dist_above_target = null
+zoom_speed = null
+min_zoom = null
+max_zoom = null
+draw_camera_logic = null
+
+[node name="PushBoxCamera2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_ttnp6")]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 30, 0)
+target = NodePath("../Vessel")
 
 [node name="debug" type="Label" parent="PushBoxCamera2"]
 visible = false
@@ -74,7 +88,6 @@ script = ExtResource("3_4fllx")
 [node name="PushBoxCamera3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_ttnp6")]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 30, 0)
 target = NodePath("../Vessel")
-dist_above_target = 100.0
 
 [node name="debug" type="Label" parent="PushBoxCamera3"]
 visible = false
@@ -97,6 +110,3 @@ noise = SubResource("FastNoiseLite_pu6hu")
 stream = SubResource("AudioStreamPlaylist_pjjl5")
 autoplay = true
 bus = &"Music"
-
-[node name="CameraControllerBase" type="Camera3D" parent="."]
-script = ExtResource("8_wjhmo")
