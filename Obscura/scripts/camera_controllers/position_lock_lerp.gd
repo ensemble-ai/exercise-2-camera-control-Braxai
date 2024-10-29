@@ -6,7 +6,7 @@ extends CameraControllerBase
 
 @export var follow_speed: float = 100.0
 @export var catchup_speed: float = 150.0
-@export var leash_distance: float = 60.0
+@export var leash_distance: float = 20.0
 
 func _ready() -> void:
 	super()
