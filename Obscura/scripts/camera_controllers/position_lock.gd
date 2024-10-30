@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 	if draw_camera_logic: 
 		draw_logic()
 
+	# camera position follows target 
 	global_position = target.global_position
 
 	super(delta)
@@ -21,7 +22,7 @@ func _process(delta: float) -> void:
 
 func draw_logic() -> void:
 	var cross_size = 2.5 # half of 5
-	var line_color = Color(1, 1, 1)
+	var line_color = Color.BLACK
 
 	# Define a material for the mesh lines
 	var material = ORMMaterial3D.new()

@@ -2,10 +2,10 @@ class_name LerpSmoothingFocus
 extends CameraControllerBase
 
 
-# lead speed is used as a multipler of the target speed to handle base and hyper speed movement
+# lead_speed is used as a multipler of the target speed to handle base and hyper speed movement
 @export var lead_speed: float = 3.0
 @export var catchup_delay_duration: float = 0.05
-@export var catchup_speed: float = 150.0
+@export var catchup_speed: float = 100.0
 @export var leash_distance: float = 20.0
 
 

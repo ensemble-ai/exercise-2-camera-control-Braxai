@@ -2,10 +2,8 @@ class_name PositionLockAndLerpSmoothing
 extends CameraControllerBase
 
 
-# USER NOTE : Feels much better when zoomed out a bit
-
-@export var follow_speed: float = 100.0
-@export var catchup_speed: float = 150.0
+@export var follow_speed: float = 50.0
+@export var catchup_speed: float = 75.0
 @export var leash_distance: float = 20.0
 
 func _ready() -> void:
